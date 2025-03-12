@@ -1,5 +1,5 @@
 import LoginPresenter from './login-presenter';
-import * as StoyAPI from '../../../data/api';
+import * as StoryAPI from '../../../data/api';
 import * as AuthModel from '../../../utils/auth';
 
 export default class LoginPage {
@@ -41,7 +41,7 @@ export default class LoginPage {
   async afterRender() {
     this.#presenter = new LoginPresenter({
       view: this,
-      model: StoyAPI,
+      model: StoryAPI,
       authModel: AuthModel,
     });
 
