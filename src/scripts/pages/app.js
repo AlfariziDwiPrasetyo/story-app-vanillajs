@@ -1,6 +1,12 @@
 import routes from '../routes/routes';
 import { getActiveRoute } from '../routes/url-parser';
+import {
+  generateAuthenticatedNavigationListTemplate,
+  generateMainNavigationListTemplate,
+  generateUnauthenticatedNavigationListTemplate,
+} from '../templates';
 import { transitionHelper } from '../utils';
+import { getAccessToken, getLogout } from '../utils/auth';
 
 class App {
   #content = null;
@@ -36,13 +42,41 @@ class App {
     });
   }
 
+  #setupNavigationList() {
+    const isLogin = !!getAccessToken();
+    const navList = this.#navigationDrawer.children.namedItem('navlist');
+    const navListMain = this.#navigationDrawer.children.namedItem('navlist-main');
+
+    // User not log in
+    if (!isLogin) {
+      navListMain.innerHTML = '';
+      navList.innerHTML = '';
+      navList.innerHTML = generateUnauthenticatedNavigationListTemplate();
+      return;
+    }
+
+    navList.innerHTML = generateMainNavigationListTemplate();
+
+    navList.innerHTML = generateAuthenticatedNavigationListTemplate();
+
+    const logoutButton = document.getElementById('logout-button');
+    logoutButton.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      if (confirm('Apakah Anda yakin ingin keluar?')) {
+        getLogout();
+
+        // Redirect
+        location.hash = '/login';
+      }
+    });
+  }
+
   async renderPage() {
     const url = getActiveRoute();
     const route = routes[url];
 
     const page = route();
-
-    console.log(url);
 
     const transition = transitionHelper({
       updateDOM: async () => {
@@ -54,6 +88,7 @@ class App {
     transition.ready.catch(console.error);
     transition.updateCallbackDone.then(() => {
       scrollTo({ top: 0, behavior: 'instant' });
+      this.#setupNavigationList();
     });
   }
 }

@@ -10,4 +10,13 @@ export default class HomePage {
   async afterRender() {
     // Do your job here
   }
+
+  // showLoading() {
+  //   document.getElementById('reports-list-loading-container').innerHTML =
+  //     generateLoaderAbsoluteTemplate();
+  // }
+
+  // hideLoading() {
+  //   document.getElementById('reports-list-loading-container').innerHTML = '';
+  // }
 }
