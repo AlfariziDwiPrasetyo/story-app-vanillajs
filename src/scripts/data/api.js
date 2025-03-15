@@ -1,9 +1,11 @@
 import CONFIG from '../config';
+import { getAccessToken } from '../utils/auth';
 
 const ENDPOINTS = {
-  ENDPOINT: `${CONFIG.BASE_URL}/your/endpoint/here`,
+  // ENDPOINT: `${CONFIG.BASE_URL}/your/endpoint/here`,
   REGISTER: `${CONFIG.BASE_URL}/register`,
   LOGIN: `${CONFIG.BASE_URL}/login`,
+  STORY_LIST: `${CONFIG.BASE_URL}/stories`,
   // MY_USER_INFO: `${CONFIG.BASE_URL}/users/me`,
 };
 
@@ -53,7 +55,16 @@ export async function getLogin({ email, password }) {
 //   };
 // }
 
-export async function getData() {
-  const fetchResponse = await fetch(ENDPOINTS.ENDPOINT);
-  return await fetchResponse.json();
+export async function getAllStories() {
+  const accessToken = getAccessToken();
+
+  const fetchResponse = await fetch(ENDPOINTS.STORY_LIST, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  const json = await fetchResponse.json();
+
+  return {
+    ...json,
+    ok: fetchResponse.ok,
+  };
 }
