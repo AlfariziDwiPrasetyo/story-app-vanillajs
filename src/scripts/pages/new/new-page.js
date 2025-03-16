@@ -2,12 +2,13 @@ import Camera from '../../utils/camera';
 import NewPresenter from './new-presenter';
 import * as StoryAPI from '../../data/api';
 import Map from '../../utils/map';
+import { generateLoaderAbsoluteTemplate } from '../../templates';
 
 export default class NewPage {
   #presenter;
   #form;
   #isCameraOpen = false;
-  #takenDocumentations = [];
+  #takenDocumentations = null;
   #camera;
   #map = null;
 
@@ -98,9 +99,9 @@ export default class NewPage {
       view: this,
       model: StoryAPI,
     });
-    this.#takenDocumentations = [];
+    this.#takenDocumentations = null;
 
-    // this.#presenter.showNewFormMap();
+    this.#presenter.showNewFormMap();
     this.#setupForm();
   }
 
@@ -154,11 +155,12 @@ export default class NewPage {
 
       const data = {
         description: this.#form.elements.namedItem('description').value,
-        evidenceImages: this.#takenDocumentations.map((picture) => picture.blob),
+        // evidenceImages: this.#takenDocumentations.map((picture) => picture.blob),
         latitude: this.#form.elements.namedItem('latitude').value,
         longitude: this.#form.elements.namedItem('longitude').value,
       };
-      await this.#presenter.postNewReport(data);
+      console.log(data);
+      await this.#presenter.postNewStory(data);
     });
 
     document.getElementById('documentations-input').addEventListener('change', async (event) => {
@@ -196,6 +198,11 @@ export default class NewPage {
   }
 
   async #addTakenPicture(image) {
+    if (!image) {
+      console.warn('⚠️ No image provided!');
+      return;
+    }
+
     let blob = image;
 
     if (image instanceof String) {
@@ -206,56 +213,33 @@ export default class NewPage {
       id: `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       blob: blob,
     };
-    this.#takenDocumentations = [...this.#takenDocumentations, newDocumentation];
+    this.#takenDocumentations = newDocumentation;
   }
 
   async #populateTakenPictures() {
-    const html = this.#takenDocumentations.reduce((accumulator, picture, currentIndex) => {
-      const imageUrl = URL.createObjectURL(picture.blob);
-      return accumulator.concat(`
-        <li class="new-form__documentations__outputs-item">
-          <button type="button" data-deletepictureid="${
-            picture.id
-          }" class="new-form__documentations__outputs-item__delete-btn">
-            <img src="${imageUrl}" alt="Dokumentasi ke-${currentIndex + 1}">
-          </button>
-        </li>
-      `);
-    }, '');
+    let html = '';
+
+    if (this.#takenDocumentations) {
+      const imageUrl = URL.createObjectURL(this.#takenDocumentations.blob);
+      html = `
+      <li class="new-form__documentations__outputs-item">
+        <button type="button" id="delete-photo" class="new-form__documentations__outputs-item__delete-btn">
+          <img src="${imageUrl}" alt="Dokumentasi">
+        </button>
+      </li>
+    `;
+    }
 
     document.getElementById('documentations-taken-list').innerHTML = html;
 
-    document.querySelectorAll('button[data-deletepictureid]').forEach((button) =>
-      button.addEventListener('click', (event) => {
-        const pictureId = event.currentTarget.dataset.deletepictureid;
-
-        const deleted = this.#removePicture(pictureId);
-        if (!deleted) {
-          console.log(`Picture with id ${pictureId} was not found`);
-        }
-
-        // Updating taken pictures
+    const deleteButton = document.getElementById('delete-photo');
+    if (deleteButton) {
+      deleteButton.addEventListener('click', () => {
+        this.#takenDocumentations = null;
+        document.getElementById('documentations-input').value = '';
         this.#populateTakenPictures();
-      }),
-    );
-  }
-
-  #removePicture(id) {
-    const selectedPicture = this.#takenDocumentations.find((picture) => {
-      return picture.id == id;
-    });
-
-    // Check if founded selectedPicture is available
-    if (!selectedPicture) {
-      return null;
+      });
     }
-
-    // Deleting selected selectedPicture from takenPictures
-    this.#takenDocumentations = this.#takenDocumentations.filter((picture) => {
-      return picture.id != selectedPicture.id;
-    });
-
-    return selectedPicture;
   }
 
   #updateLatLngInput(latitude, longitude) {
@@ -291,5 +275,13 @@ export default class NewPage {
     document.getElementById('submit-button-container').innerHTML = `
       <button class="btn" type="submit">Buat Story</button>
     `;
+  }
+
+  showMapLoading() {
+    document.getElementById('map-loading-container').innerHTML = generateLoaderAbsoluteTemplate();
+  }
+
+  hideMapLoading() {
+    document.getElementById('map-loading-container').innerHTML = '';
   }
 }

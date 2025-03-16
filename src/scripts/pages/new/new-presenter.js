@@ -7,16 +7,16 @@ export default class NewPresenter {
     this.#model = model;
   }
 
-  // async showNewFormMap() {
-  //   this.#view.showMapLoading();
-  //   try {
-  //     await this.#view.initialMap();
-  //   } catch (error) {
-  //     console.error('showNewFormMap: error:', error);
-  //   } finally {
-  //     this.#view.hideMapLoading();
-  //   }
-  // }
+  async showNewFormMap() {
+    this.#view.showMapLoading();
+    try {
+      await this.#view.initialMap();
+    } catch (error) {
+      console.error('showNewFormMap: error:', error);
+    } finally {
+      this.#view.hideMapLoading();
+    }
+  }
 
   async postNewStory({ description, photo, latitude, longitude }) {
     this.#view.showSubmitLoadingButton();

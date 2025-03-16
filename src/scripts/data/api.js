@@ -85,7 +85,7 @@ export async function getStoryById(id) {
   };
 }
 
-export async function storeNewReport({ description, lat, lon, photo }) {
+export async function storeNewStory({ description, lat, lon, photo }) {
   const accessToken = getAccessToken();
 
   const formData = new FormData();
