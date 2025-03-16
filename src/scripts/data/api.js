@@ -7,6 +7,7 @@ const ENDPOINTS = {
   LOGIN: `${CONFIG.BASE_URL}/login`,
   STORY_LIST: `${CONFIG.BASE_URL}/stories`,
   STORY_DETAIL: (id) => `${CONFIG.BASE_URL}/stories/${id}`,
+  STORE_STORY: `${CONFIG.BASE_URL}/stories`,
   // MY_USER_INFO: `${CONFIG.BASE_URL}/users/me`,
 };
 
@@ -78,6 +79,28 @@ export async function getStoryById(id) {
   });
 
   const json = await fetchResponse.json();
+  return {
+    ...json,
+    ok: fetchResponse.ok,
+  };
+}
+
+export async function storeNewReport({ description, lat, lon, photo }) {
+  const accessToken = getAccessToken();
+
+  const formData = new FormData();
+  formData.set('description', description);
+  formData.set('lat', lat);
+  formData.set('lon', lon);
+  formData.set('photo', photo);
+
+  const fetchResponse = await fetch(ENDPOINTS.STORE_STORY, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${accessToken}` },
+    body: formData,
+  });
+  const json = await fetchResponse.json();
+
   return {
     ...json,
     ok: fetchResponse.ok,

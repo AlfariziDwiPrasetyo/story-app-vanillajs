@@ -2,6 +2,7 @@
 import '../styles/styles.css';
 
 import App from './pages/app';
+import Camera from './utils/camera';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const app = new App({
@@ -13,5 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   window.addEventListener('hashchange', async () => {
     await app.renderPage();
+
+    Camera.stopAllStreams();
   });
 });
