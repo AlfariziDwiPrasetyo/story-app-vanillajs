@@ -11,7 +11,14 @@ export default class HomePresenter {
 
   async initialGallery() {
     this.#view.showLoading();
-    const response = await getAllStories();
-    console.log(response);
+    try {
+      const response = await getAllStories();
+      this.#view.populateStoriesList(response.listStory);
+    } catch (error) {
+      console.error('initialGallery: error:', error);
+      this.#view.populateStoriesListError(error.message);
+    } finally {
+      this.#view.hideLoading();
+    }
   }
 }

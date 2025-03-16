@@ -32,3 +32,45 @@ export function generateMainNavigationListTemplate() {
     <li><a id="bookmark-button" class="bookmark-button" href="#/bookmark">Laporan Tersimpan</a></li>
   `;
 }
+
+export function generateStoryItemTemplate({
+  createdAt,
+  description,
+  id,
+  lat,
+  lon,
+  name,
+  photoUrl,
+}) {
+  return `
+    <div id="story-${id}" class="story-item">
+      <img src="${photoUrl}" alt="Story by ${name}" class="story-item__image"/>
+      <div class="story-item__content">
+        <h3 class="story-item__name">${name}</h3>
+        <p class="story-item__description">${description}</p>
+        <div class="story-item__meta">
+          <span class="story-item__date">${new Date(createdAt).toLocaleDateString()}</span>
+          <span class="story-item__location">📍 ${lat}, ${lon}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+export function generateStoriesListErrorTemplate(message) {
+  return `
+    <div id="story-list-error" class="story-list__error">
+      <h2>Terjadi kesalahan pengambilan cerita</h2>
+      <p>${message ? message : 'Gunakan jaringan lain atau laporkan error ini.'}</p>
+    </div>
+  `;
+}
+
+export function generateStoriesListEmptyTemplate() {
+  return `
+    <div id="story-list-empty" class="story-list__empty">
+      <h2>Tidak ada cerita yang tersedia</h2>
+      <p>Saat ini, tidak ada cerita yang bisa ditampilkan.</p>
+    </div>
+  `;
+}

@@ -1,5 +1,10 @@
 import * as StoryAPI from '../../data/api';
-import { generateLoaderAbsoluteTemplate } from '../../templates';
+import {
+  generateLoaderAbsoluteTemplate,
+  generateStoriesListEmptyTemplate,
+  generateStoriesListErrorTemplate,
+  generateStoryItemTemplate,
+} from '../../templates';
 import HomePresenter from './home-presenter';
 
 export default class HomePage {
@@ -14,7 +19,7 @@ export default class HomePage {
 
       <section class="container">
         <div class="story-list__container">
-          <div id="story-list"></div>
+          <div id="story-list" class="story-list__item-container"></div>
           <div id="story-list-loading-container"></div>
         </div>
       </section>
@@ -30,6 +35,21 @@ export default class HomePage {
     await this.#presenter.initialGallery();
   }
 
+  populateStoriesList(stories) {
+    if (stories.length <= 0) {
+      this.populateStoriesEmpty();
+      return;
+    }
+
+    const html = stories.reduce((accumulator, story) => {
+      return accumulator.concat(generateStoryItemTemplate(story));
+    }, '');
+
+    document.getElementById('story-list').innerHTML = `
+      <div class="story-list">${html}</div>
+    `;
+  }
+
   showLoading() {
     document.getElementById('story-list-loading-container').innerHTML =
       generateLoaderAbsoluteTemplate();
@@ -37,5 +57,13 @@ export default class HomePage {
 
   hideLoading() {
     document.getElementById('story-list-loading-container').innerHTML = '';
+  }
+
+  populateStoriesListError(message) {
+    document.getElementById('story-list').innerHTML = generateStoriesListErrorTemplate(message);
+  }
+
+  populateStoriesEmpty() {
+    document.getElementById('story-list').innerHTML = generateStoriesListEmptyTemplate();
   }
 }
