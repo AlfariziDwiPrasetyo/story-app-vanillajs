@@ -7,3 +7,5 @@ dist
 # Files
 .env
 src/scripts/config.js
+
+STUDENT.txt
