@@ -43,16 +43,18 @@ export function generateStoryItemTemplate({
   photoUrl,
 }) {
   return `
-    <div id="story-${id}" class="story-item">
-      <img src="${photoUrl}" alt="Story by ${name}" class="story-item__image"/>
-      <div class="story-item__content">
-        <h3 class="story-item__name">${name}</h3>
-        <p class="story-item__description">${description}</p>
-        <div class="story-item__meta">
-          <span class="story-item__date">${new Date(createdAt).toLocaleDateString()}</span>
-          <span class="story-item__location">📍 ${lat}, ${lon}</span>
+  <div id="${id}" class="story-item">
+      <a href="#/story/${id}">
+        <img src="${photoUrl}" alt="Story by ${name}" class="story-item__image"/>
+        <div class="story-item__content">
+          <h3 class="story-item__name">${name}</h3>
+          <p class="story-item__description">${description}</p>
+          <div class="story-item__meta">
+            <span class="story-item__date">${new Date(createdAt).toLocaleDateString()}</span>
+            <span class="story-item__location">📍 ${lat}, ${lon}</span>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   `;
 }
