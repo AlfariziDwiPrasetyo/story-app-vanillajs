@@ -155,7 +155,7 @@ export default class NewPage {
 
       const data = {
         description: this.#form.elements.namedItem('description').value,
-        // evidenceImages: this.#takenDocumentations.map((picture) => picture.blob),
+        photo: this.#takenDocumentations.blob,
         latitude: this.#form.elements.namedItem('latitude').value,
         longitude: this.#form.elements.namedItem('longitude').value,
       };
