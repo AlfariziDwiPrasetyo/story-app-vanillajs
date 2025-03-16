@@ -45,11 +45,9 @@ class App {
   #setupNavigationList() {
     const isLogin = !!getAccessToken();
     const navList = this.#navigationDrawer.children.namedItem('navlist');
-    const navListMain = this.#navigationDrawer.children.namedItem('navlist-main');
 
     // User not log in
     if (!isLogin) {
-      navListMain.innerHTML = '';
       navList.innerHTML = '';
       navList.innerHTML = generateUnauthenticatedNavigationListTemplate();
       return;
