@@ -6,6 +6,7 @@ const ENDPOINTS = {
   REGISTER: `${CONFIG.BASE_URL}/register`,
   LOGIN: `${CONFIG.BASE_URL}/login`,
   STORY_LIST: `${CONFIG.BASE_URL}/stories`,
+  STORY_DETAIL: (id) => `${CONFIG.BASE_URL}/stories/${id}`,
   // MY_USER_INFO: `${CONFIG.BASE_URL}/users/me`,
 };
 
@@ -63,6 +64,20 @@ export async function getAllStories() {
   });
   const json = await fetchResponse.json();
 
+  return {
+    ...json,
+    ok: fetchResponse.ok,
+  };
+}
+
+export async function getStoryById(id) {
+  const accessToken = getAccessToken();
+
+  const fetchResponse = await fetch(ENDPOINTS.STORY_DETAIL(id), {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  const json = await fetchResponse.json();
   return {
     ...json,
     ok: fetchResponse.ok,

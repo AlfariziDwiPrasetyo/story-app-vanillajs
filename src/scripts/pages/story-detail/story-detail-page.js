@@ -1,6 +1,11 @@
 import { parseActivePathname } from '../../routes/url-parser';
 import * as StoryAPI from '../../data/api';
 import StoryDetailPresenter from './story-detail-presenter';
+import {
+  generateLoaderAbsoluteTemplate,
+  generateStoriesListErrorTemplate,
+  generateStoryDetailTemplate,
+} from '../../templates';
 
 export default class StoryDetailPage {
   #presenter = null;
@@ -15,21 +20,6 @@ export default class StoryDetailPage {
           <div id="story-detail-loading-container"></div>
         </div>
       </section>
-      
-      <section class="container">
-        <hr>
-        <div class="story-detail__comments__container">
-          <div class="story-detail__comments-form__container">
-            <h2 class="story-detail__comments-form__title">Beri Tanggapan</h2>
-            <form id="comments-list-form" class="story-detail__comments-form__form">
-              <textarea name="body" placeholder="Beri tanggapan terkait laporan."></textarea>
-              <div id="submit-button-container">
-                <button class="btn" type="submit">Tanggapi</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
     `;
   }
 
@@ -40,6 +30,14 @@ export default class StoryDetailPage {
     });
 
     this.#presenter.showStoryDetail();
+  }
+
+  populateStoryDetail(story) {
+    document.getElementById('story-detail').innerHTML = generateStoryDetailTemplate(story);
+  }
+
+  populateStoryDetailError(error) {
+    document.getElementById('story-detail').innerHTML = generateStoriesListErrorTemplate(error);
   }
 
   showStoryDetailLoading() {

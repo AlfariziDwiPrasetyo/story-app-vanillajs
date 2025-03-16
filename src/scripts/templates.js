@@ -74,3 +74,30 @@ export function generateStoriesListEmptyTemplate() {
     </div>
   `;
 }
+
+export function generateStoryDetailTemplate({
+  createdAt,
+  description,
+  id,
+  lat,
+  lon,
+  name,
+  photoUrl,
+}) {
+  return `
+    <div class="story-detail">
+      <div class="story-detail__header">
+        <img src="${photoUrl}" alt="Story by ${name}" class="story-detail__image">
+        <h2 class="story-detail__title">${name}</h2>
+        <p class="story-detail__date">${new Date(createdAt).toLocaleString()}</p>
+      </div>
+      <div class="story-detail__content">
+        <p class="story-detail__description">${description}</p>
+        <div class="story-detail__meta">
+          <p><strong>ID:</strong> ${id}</p>
+          <p><strong>Location:</strong> ${lat}, ${lon}</p>
+        </div>
+      </div>
+    </div>
+  `;
+}
