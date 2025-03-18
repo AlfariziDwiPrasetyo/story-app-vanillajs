@@ -34,6 +34,7 @@ export default class StoryDetailPage {
     document.getElementById('story-detail').innerHTML = generateStoryDetailTemplate(story);
 
     if (story.placeName) {
+      document.querySelector('.story-detail__body__map__container').style.display = 'block';
       await this.#presenter.showStoryDetailMap();
 
       if (this.#map) {

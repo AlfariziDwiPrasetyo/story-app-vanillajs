@@ -661,6 +661,9 @@ i.loader-button {
 }
 
 /* map */
+.story-detail__body__map__container{
+  display: none;
+}
 
 .story-detail__description__title,
 .story-detail__map__title,
