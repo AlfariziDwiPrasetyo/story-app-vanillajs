@@ -15,18 +15,39 @@
   --secondary-text-color: #ffffff;
 }
 
+@keyframes full-slide-from-top {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes full-slide-to-bottom {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
 ::view-transition-old(root) {
-  animation-name: full-slide-to-left;
+  animation-name: full-slide-to-bottom;
   animation-duration: 900ms;
   animation-timing-function: ease-out;
 }
 
 ::view-transition-new(root) {
-  animation-name: full-slide-from-right;
+  animation-name: full-slide-from-top;
   animation-duration: 900ms;
   animation-timing-function: ease-out;
 }
-
 
 body {
   font-family: "Geist", sans-serif;
