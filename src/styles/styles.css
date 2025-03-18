@@ -631,12 +631,11 @@ i.loader-button {
 
 .story-detail {
   display: flex;
-  padding: 2rem 5rem;
+  /* padding: 2rem 5rem; */
   flex-direction: column;
 }
 
 .story-detail {
-  margin: 20px auto;
   padding: 16px;
   border-radius: 10px;
 }
@@ -786,6 +785,10 @@ i.loader-button {
     grid-template-columns: repeat(3, 1fr);
     gap: 16px; 
     margin-top: 12px;
+  }
+
+  .story-detail {
+      margin: 10px auto;
   }
 
   .story-detail__image {
