@@ -101,7 +101,7 @@ export function generateStoryDetailTemplate({
         <p class="story-detail__description">${description}</p>
         <div class="story-detail__meta">
           <p><strong>ID:</strong> ${id}</p>
-          <p><strong>Location:</strong> ${placeName ? placeName : 'anonymous 🎭'}</p>
+          <p><strong>Location:</strong> ${placeName ? placeName : 'Tidak Diketahui'}</p>
         </div>
       </div>
       <div class="story-detail__body__map__container">
