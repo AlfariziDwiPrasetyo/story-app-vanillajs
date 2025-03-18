@@ -1,15 +1,14 @@
 import { parseActivePathname } from '../../routes/url-parser';
-import * as StoryAPI from '../../data/api';
 import StoryDetailPresenter from './story-detail-presenter';
 import {
   generateLoaderAbsoluteTemplate,
   generateStoriesListErrorTemplate,
   generateStoryDetailTemplate,
 } from '../../templates';
+import Map from '../../utils/map';
 
 export default class StoryDetailPage {
   #presenter = null;
-  #form = null;
   #map = null;
 
   async render() {
@@ -26,14 +25,26 @@ export default class StoryDetailPage {
   async afterRender() {
     this.#presenter = new StoryDetailPresenter(parseActivePathname().id, {
       view: this,
-      apiModel: StoryAPI,
     });
 
     this.#presenter.showStoryDetail();
   }
 
-  populateStoryDetail(story) {
+  async populateStoryDetail(story) {
     document.getElementById('story-detail').innerHTML = generateStoryDetailTemplate(story);
+
+    if (story.placeName) {
+      await this.#presenter.showStoryDetailMap();
+
+      if (this.#map) {
+        const storyCoordinate = [story.lat, story.lon];
+        const markerOptions = { alt: story.placeName };
+        const popupOptions = { content: story.description };
+
+        this.#map.changeCamera(storyCoordinate);
+        this.#map.addMarker(storyCoordinate, markerOptions, popupOptions);
+      }
+    }
   }
 
   populateStoryDetailError(error) {
@@ -47,5 +58,19 @@ export default class StoryDetailPage {
 
   hideStoryDetailLoading() {
     document.getElementById('story-detail-loading-container').innerHTML = '';
+  }
+
+  showMapLoading() {
+    document.getElementById('map-loading-container').innerHTML = generateLoaderAbsoluteTemplate();
+  }
+
+  hideMapLoading() {
+    document.getElementById('map-loading-container').innerHTML = '';
+  }
+
+  async initialMap() {
+    this.#map = await Map.build('#map', {
+      zoom: 15,
+    });
   }
 }

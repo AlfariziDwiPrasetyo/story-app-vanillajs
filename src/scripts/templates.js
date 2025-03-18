@@ -83,6 +83,7 @@ export function generateStoryDetailTemplate({
   id,
   lat,
   lon,
+  placeName,
   name,
   photoUrl,
 }) {
@@ -97,7 +98,14 @@ export function generateStoryDetailTemplate({
         <p class="story-detail__description">${description}</p>
         <div class="story-detail__meta">
           <p><strong>ID:</strong> ${id}</p>
-          <p><strong>Location:</strong> ${lat}, ${lon}</p>
+          <p><strong>Location:</strong> ${placeName ? placeName : 'anonymous 🎭'}</p>
+        </div>
+      </div>
+      <div class="story-detail__body__map__container">
+        <h2 class="story-detail__map__title">Lokasi</h2>
+        <div class="story-detail__map__container">
+          <div id="map" class="story-detail__map"></div>
+          <div id="map-loading-container"></div>
         </div>
       </div>
     </div>

@@ -660,6 +660,26 @@ i.loader-button {
   color: var(--primary-color);
 }
 
+/* map */
+
+.story-detail__description__title,
+.story-detail__map__title,
+.story-detail__comments-form__title {
+  margin-block-end: 12px;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
+.story-detail__map__container,
+.story-detail__map {
+  height: 500px;
+  position: relative;
+}
+
+.story-detail__map__container {
+  background-color: darkgray;
+}
+
 
 @media screen and (width > 1000px) {
   .navigation-drawer {
