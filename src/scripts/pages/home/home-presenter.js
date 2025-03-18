@@ -1,4 +1,5 @@
 import { getAllStories } from '../../data/api';
+import { storyMapper } from '../../data/api-mapper';
 
 export default class HomePresenter {
   #view;
@@ -13,7 +14,17 @@ export default class HomePresenter {
     this.#view.showLoading();
     try {
       const response = await getAllStories();
-      this.#view.populateStoriesList(response.listStory);
+      const story = await Promise.all(
+        response.listStory.map(async (story) => {
+          if (story.lat && story.lon) {
+            return await storyMapper(story);
+          }
+          return story;
+        }),
+      );
+
+      console.log(story);
+      this.#view.populateStoriesList(story);
     } catch (error) {
       console.error('initialGallery: error:', error);
       this.#view.populateStoriesListError(error.message);

@@ -1,4 +1,5 @@
 import * as StoryAPI from '../../data/api';
+import { storyMapper } from '../../data/api-mapper';
 import {
   generateLoaderAbsoluteTemplate,
   generateStoriesListEmptyTemplate,

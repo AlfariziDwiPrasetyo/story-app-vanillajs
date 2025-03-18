@@ -41,6 +41,7 @@ export function generateStoryItemTemplate({
   lon,
   name,
   photoUrl,
+  placeName,
 }) {
   return `
   <div id="${id}" class="story-item">
@@ -51,7 +52,9 @@ export function generateStoryItemTemplate({
           <p class="story-item__description">${description}</p>
           <div class="story-item__meta">
             <span class="story-item__date">${new Date(createdAt).toLocaleDateString()}</span>
-            <span class="story-item__location">📍 ${lat}, ${lon}</span>
+            <span class="story-item__location">📍 ${
+              placeName ? placeName : 'Tidak diketahui'
+            }</span>
           </div>
         </div>
       </a>
