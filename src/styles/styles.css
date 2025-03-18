@@ -683,6 +683,25 @@ i.loader-button {
   background-color: darkgray;
 }
 
+/* skip link button */
+.skip-link {
+  background: var(--primary-color);
+  padding: 4px 8px;
+
+  inset-inline: auto;
+  position: absolute;
+
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+
+  transform: translateY(-150%);
+}
+
+.skip-link:focus,
+.skip-link:focus-within {
+  transform: translateY(0%);
+} 
 
 @media screen and (width > 1000px) {
   .navigation-drawer {
