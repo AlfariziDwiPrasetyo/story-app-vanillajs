@@ -1,6 +1,7 @@
 import LoginPresenter from './login-presenter';
 import * as StoryAPI from '../../../data/api';
 import * as AuthModel from '../../../utils/auth';
+import Swal from 'sweetalert2';
 
 export default class LoginPage {
   #presenter = null;
@@ -68,7 +69,11 @@ export default class LoginPage {
   }
 
   loginFailed(message) {
-    alert(message);
+    Swal.fire({
+      title: 'Error!',
+      text: message,
+      icon: 'error',
+    });
   }
 
   showSubmitLoadingButton() {

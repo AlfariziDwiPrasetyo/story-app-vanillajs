@@ -3,6 +3,7 @@ import NewPresenter from './new-presenter';
 import * as StoryAPI from '../../data/api';
 import Map from '../../utils/map';
 import { generateLoaderAbsoluteTemplate } from '../../templates';
+import Swal from 'sweetalert2';
 
 export default class NewPage {
   #presenter;
@@ -256,7 +257,11 @@ export default class NewPage {
   }
 
   storeFailed(message) {
-    alert(message);
+    Swal.fire({
+      title: 'Error!',
+      text: message,
+      icon: 'error',
+    });
   }
 
   clearForm() {

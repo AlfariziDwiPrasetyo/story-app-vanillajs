@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import routes from '../routes/routes';
 import { getActiveRoute } from '../routes/url-parser';
 import {
@@ -69,12 +70,20 @@ class App {
     logoutButton.addEventListener('click', (event) => {
       event.preventDefault();
 
-      if (confirm('Apakah Anda yakin ingin keluar?')) {
-        getLogout();
-
-        // Redirect
-        location.hash = '/login';
-      }
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Are you really want to Logout ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Logout!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          getLogout();
+          location.hash = '/login';
+        }
+      });
     });
   }
 

@@ -1,5 +1,6 @@
 import RegisterPresenter from './register-presenter';
 import * as StoryAPI from '../../../data/api';
+import Swal from 'sweetalert2';
 
 export default class RegisterPage {
   #presenter = null;
@@ -74,7 +75,11 @@ export default class RegisterPage {
   }
 
   registeredFailed(message) {
-    alert(message);
+    Swal.fire({
+      title: 'Error!',
+      text: message,
+      icon: 'error',
+    });
   }
 
   showSubmitLoadingButton() {
