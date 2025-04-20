@@ -6,6 +6,7 @@ import {
   generateStoryDetailTemplate,
 } from '../../templates';
 import Map from '../../utils/map';
+import * as StoryAPI from '../../data/api';
 
 export default class StoryDetailPage {
   #presenter = null;
@@ -25,6 +26,7 @@ export default class StoryDetailPage {
   async afterRender() {
     this.#presenter = new StoryDetailPresenter(parseActivePathname().id, {
       view: this,
+      apiModel: StoryAPI,
     });
 
     this.#presenter.showStoryDetail();
@@ -68,6 +70,13 @@ export default class StoryDetailPage {
   hideMapLoading() {
     document.getElementById('map-loading-container').innerHTML = '';
   }
+
+  // addNotifyMeEventListener() {
+  //   document.getElementById('story-detail-notify-me').addEventListener('click', () => {
+  //     console.log('masuk');
+  //     this.#presenter.notifyMe();
+  //   });
+  // }
 
   async initialMap() {
     this.#map = await Map.build('#map', {

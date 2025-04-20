@@ -12,7 +12,7 @@ export function generateLoaderAbsoluteTemplate() {
 
 export function generateUnauthenticatedNavigationListTemplate() {
   return `
-    <li id="push-notification-tools" class="push-notification-tools"></li>
+    <li><a href="javascript:void(0)" id="push-notification-tools" class="push-notification-tools"></a></li>
     <li><a id="login-button" href="#/login"><button class="btn-ghost">Login</button></a></li>
     <li><a id="register-button" href="#/register"><button class="btn">Register</button></a></li>
   `;
@@ -20,7 +20,7 @@ export function generateUnauthenticatedNavigationListTemplate() {
 
 export function generateAuthenticatedNavigationListTemplate() {
   return `
-    <li id="push-notification-tools" class="push-notification-tools"></li>
+    <li><a href="javascript:void(0)" id="push-notification-tools" class="push-notification-tools"></a></li>
     <li><a id="new-report-button" href="#/new"><button class="btn-ghost">Buat Cerita<i class="fas fa-plus"></i></button></a></li>
     <li><a id="logout-button" class="logout-button" href="#/logout"><button class="btn"><i class="fas fa-sign-out-alt"></i> Logout</button></a></li>
   `;
@@ -102,6 +102,11 @@ export function generateStoryDetailTemplate({
         <div class="story-detail__meta">
           <p><strong>ID:</strong> ${id}</p>
           <p><strong>Location:</strong> ${placeName ? placeName : 'Tidak Diketahui'}</p>
+          <div class="story-detail_button-container">
+            <button id="" class="btn notify-me">
+              Save Story <i class="far fa-bell"></i>
+            </button>
+          </div>
         </div>
       </div>
       <div class="story-detail__body__map__container">
@@ -112,5 +117,21 @@ export function generateStoryDetailTemplate({
         </div>
       </div>
     </div>
+  `;
+}
+
+export function generateSubscribeButtonTemplate() {
+  return `
+    <button id="subscribe-button" class="btn subscribe-button">
+      Subscribe <i class="fas fa-bell"></i>
+    </button>
+  `;
+}
+
+export function generateUnsubscribeButtonTemplate() {
+  return `
+    <button id="unsubscribe-button" class="btn-ghost unsubscribe-button">
+      Unsubscribe <i class="fas fa-bell-slash"></i>
+    </button>
   `;
 }

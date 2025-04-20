@@ -4,10 +4,12 @@ import { storyMapper } from '../../data/api-mapper';
 export default class StoryDetailPresenter {
   #storyId;
   #view;
+  #apiModel;
 
-  constructor(storyId, { view }) {
+  constructor(storyId, { view, apiModel }) {
     this.#storyId = storyId;
     this.#view = view;
+    this.#apiModel = apiModel;
   }
 
   async showStoryDetailMap() {
@@ -39,4 +41,17 @@ export default class StoryDetailPresenter {
       this.#view.hideStoryDetailLoading();
     }
   }
+
+  // async notifyMe() {
+  //   try {
+  //     const response = await this.#apiModel.sendReportToMeViaNotification(this.#storyId);
+  //     if (!response.ok) {
+  //       console.error('notifyMe: response:', response);
+  //       return;
+  //     }
+  //     console.log('notifyMe:', response.message);
+  //   } catch (error) {
+  //     console.error('notifyMe: error:', error);
+  //   }
+  // }
 }

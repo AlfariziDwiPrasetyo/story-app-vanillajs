@@ -723,6 +723,19 @@ i.loader-button {
   transform: translateY(0%);
 } 
 
+.story-detail_button-container{
+  display: flex;
+  gap: 20px;
+}
+
+.notify-me {
+  margin-top: 20px;
+  width: 100%;
+}
+
+
+/* Mobile */
+
 @media screen and (width > 1000px) {
   .navigation-drawer {
     min-height: auto;
@@ -796,6 +809,11 @@ i.loader-button {
     max-height: 500px;
     object-fit: cover;
     border-radius: 8px;
+  }
+
+  .notify-me {
+    margin-top: 20px;
+    width: 20%
   }
 }
 
