@@ -20,8 +20,9 @@ export function generateUnauthenticatedNavigationListTemplate() {
 
 export function generateAuthenticatedNavigationListTemplate() {
   return `
+    <li><a href="#/bookmark" class="bookmark-button"><button id="story-detail-save" class="btn-ghost">Saved story <i class="far fa-bookmark"></i></button></a></li>
     <li><a href="javascript:void(0)" id="push-notification-tools" class="push-notification-tools"></a></li>
-    <li><a id="new-report-button" href="#/new"><button class="btn-ghost">Buat Cerita<i class="fas fa-plus"></i></button></a></li>
+    <li><a id="new-report-button" href="#/new"><button class="btn-ghost">New Story<i class="fas fa-plus"></i></button></a></li>
     <li><a id="logout-button" class="logout-button" href="#/logout"><button class="btn"><i class="fas fa-sign-out-alt"></i> Logout</button></a></li>
   `;
 }

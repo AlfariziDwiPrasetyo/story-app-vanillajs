@@ -737,6 +737,11 @@ i.loader-button {
   text-align: center;
 }
 
+.bookmark {
+  color: #09090b;
+  font-weight: bold;
+}
+
 
 /* Mobile */
 

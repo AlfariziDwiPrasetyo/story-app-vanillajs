@@ -18,15 +18,15 @@ export default class NewPage {
       <section class="container">
         <div class="new-form__container">
           <form id="new-form" class="new-form">
-            <h1 class="new-report__header__title">Buat Story Baru</h1>
+            <h1 class="new-report__header__title">Create new story</h1>
             <div class="form-control">
-              <label for="description-input" class="new-form__description__title">Deskripsi</label>
+              <label for="description-input" class="new-form__description__title">Description</label>
 
               <div class="new-form__description__container">
                 <textarea
                   id="description-input"
                   name="description"
-                  placeholder="Masukkan deskripsi"
+                  placeholder="Insert description"
                 ></textarea>
               </div>
             </div>
@@ -35,7 +35,7 @@ export default class NewPage {
 
               <div class="new-form__documentations__container">
                 <div class="new-form__documentations__buttons">
-                  <button id="documentations-input-button" class="btn btn-ghost" type="button">Ambil Gambar</button>
+                  <button id="documentations-input-button" class="btn btn-ghost" type="button">Open Folder</button>
                   <input
                     id="documentations-input"
                     class="new-form__documentations__input"
@@ -47,7 +47,7 @@ export default class NewPage {
                     aria-describedby="documentations-more-info"
                   >
                   <button id="open-documentations-camera-button" class="btn btn-ghost" type="button">
-                    Buka Kamera
+                    Open Camera
                   </button>
                 </div>
                 <div id="camera-container" class="new-form__camera__container">
@@ -61,7 +61,7 @@ export default class NewPage {
                   <select id="camera-select"></select>
                   <div class="new-form__camera__tools_buttons">
                     <button id="camera-take-button" class="btn" type="button">
-                      Ambil Gambar
+                      Take Photo
                     </button>
                   </div>
                 </div>
@@ -70,7 +70,7 @@ export default class NewPage {
               </div>
             </div>
             <div class="form-control">
-              <div class="new-form__location__title">Lokasi</div>
+              <div class="new-form__location__title">Location</div>
 
               <div class="new-form__location__container">
                 <div class="new-form__location__map__container">
@@ -85,9 +85,9 @@ export default class NewPage {
             </div>
             <div class="form-buttons">
               <span id="submit-button-container">
-                <button class="btn" type="submit">Buat Laporan</button>
+                <button class="btn" type="submit">Create Story</button>
               </span>
-              <a class="btn btn-ghost" href="#/">Batal</a>
+              <a class="btn btn-ghost" href="#/">Cancel</a>
             </div>
           </form>
         </div>
@@ -184,7 +184,7 @@ export default class NewPage {
 
         this.#isCameraOpen = cameraContainer.classList.contains('open');
         if (this.#isCameraOpen) {
-          event.currentTarget.textContent = 'Tutup Kamera';
+          event.currentTarget.textContent = 'Close Camera';
 
           this.#setupCamera();
           this.#camera.launch();
@@ -192,7 +192,7 @@ export default class NewPage {
           return;
         }
 
-        event.currentTarget.textContent = 'Buka Kamera';
+        event.currentTarget.textContent = 'Open Camera';
         this.#camera.stop();
       });
   }
