@@ -733,6 +733,10 @@ i.loader-button {
   width: 100%;
 }
 
+.notFound {
+  text-align: center;
+}
+
 
 /* Mobile */
 

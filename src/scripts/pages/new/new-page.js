@@ -160,7 +160,6 @@ export default class NewPage {
         latitude: this.#form.elements.namedItem('latitude').value,
         longitude: this.#form.elements.namedItem('longitude').value,
       };
-      console.log(data);
       await this.#presenter.postNewStory(data);
     });
 

@@ -81,7 +81,7 @@ export default class StoryDetailPage {
     document.getElementById('save-actions-container').innerHTML = generateSaveStoryButtonTemplate();
 
     document.getElementById('story-detail-save').addEventListener('click', async () => {
-      await this.#presenter.saveReport();
+      await this.#presenter.saveStory();
       await this.#presenter.showSaveButton();
     });
   }
@@ -90,8 +90,9 @@ export default class StoryDetailPage {
     document.getElementById('save-actions-container').innerHTML =
       generateRemoveStoryButtonTemplate();
 
-    document.getElementById('report-detail-remove').addEventListener('click', async () => {
-      alert('Fitur simpan laporan akan segera hadir!');
+    document.getElementById('story-detail-remove').addEventListener('click', async () => {
+      await this.#presenter.removeStory();
+      await this.#presenter.showSaveButton();
     });
   }
 
@@ -100,6 +101,13 @@ export default class StoryDetailPage {
   }
 
   saveToBookmarkFailed(message) {
+    alert(message);
+  }
+
+  removeFromBookmarkSuccessfully(message) {
+    console.log(message);
+  }
+  removeFromBookmarkFailed(message) {
     alert(message);
   }
 
