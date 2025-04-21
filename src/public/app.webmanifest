@@ -1,0 +1,109 @@
+{
+    "id": "/#/",
+    "start_url": "/#/",
+    "scope": "/",
+    "name": "Story App",
+    "short_name": "StoryApp",
+    "description": "Aplikasi untuk sharing cerita.",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "theme_color": "#d97706",
+    "icons": [
+      {
+        "src": "images/icons/icon-x144.png",
+        "type": "image/png",
+        "sizes": "144x144",
+        "purpose": "any"
+      },
+      {
+        "src": "images/icons/icon-x48.png",
+        "type": "image/png",
+        "sizes": "48x48",
+        "purpose": "maskable"
+      },
+      {
+        "src": "images/icons/icon-x96.png",
+        "type": "image/png",
+        "sizes": "96x96",
+        "purpose": "maskable"
+      },
+      {
+        "src": "images/icons/icon-x192.png",
+        "type": "image/png",
+        "sizes": "192x192",
+        "purpose": "maskable"
+      },
+      {
+        "src": "images/icons/icon-x384.png",
+        "type": "image/png",
+        "sizes": "384x384",
+        "purpose": "maskable"
+      },
+      {
+        "src": "images/icons/icon-x512.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "maskable"
+      }
+    ],
+    "screenshots": [
+        {
+          "src": "images/screenshots/StoryAppWide.png",
+          "sizes": "1869x871",
+          "type": "image/png",
+          "form_factor": "wide"
+        },
+        {
+          "src": "images/screenshots/StoryAppWide2.png",
+          "sizes": "1881x864",
+          "type": "image/png",
+          "form_factor": "wide"
+        },
+        {
+          "src": "images/screenshots/StoryAppWide3.png",
+          "sizes": "1890x868",
+          "type": "image/png",
+          "form_factor": "wide"
+        },
+        {
+          "src": "images/screenshots/StoryAppNarrow.png",
+          "sizes": "583x865",
+          "type": "image/png",
+          "form_factor": "narrow"
+        },
+        {
+          "src": "images/screenshots/StoryAppNarrow2.png",
+          "sizes": "587x855",
+          "type": "image/png",
+          "form_factor": "narrow"
+        }
+    ],
+    "shortcuts": [
+      {
+        "name": "Cerita Baru",
+        "short_name": "Baru",
+        "description": "Membuat cerita baru.",
+        "url": "/?source=pwa#/new",
+        "icons": [
+          {
+            "src": "images/icons/add-x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+          }
+        ]
+      },
+      {
+        "name": "Cerita Tersimpan",
+        "short_name": "Tersimpan",
+        "description": "Lihat daftar cerita tersimpan.",
+        "url": "/?source=pwa#/bookmark",
+        "icons": [
+          {
+            "src": "images/icons/bookmark-x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+          }
+        ]
+      }
+    ]
+  }

@@ -5,11 +5,13 @@ export default class StoryDetailPresenter {
   #storyId;
   #view;
   #apiModel;
+  #dbModel;
 
-  constructor(storyId, { view, apiModel }) {
+  constructor(storyId, { view, apiModel, dbModel }) {
     this.#storyId = storyId;
     this.#view = view;
     this.#apiModel = apiModel;
+    this.#dbModel = dbModel;
   }
 
   async showStoryDetailMap() {
@@ -40,6 +42,30 @@ export default class StoryDetailPresenter {
     } finally {
       this.#view.hideStoryDetailLoading();
     }
+  }
+
+  async saveStory() {
+    try {
+      const report = await this.#apiModel.getReportById(this.#storyId);
+      await this.#dbModel.putReport(report.data);
+      this.#view.saveToBookmarkSuccessfully('Success to save to bookmark');
+    } catch (error) {
+      console.error('saveReport: error:', error);
+      this.#view.saveToBookmarkFailed(error.message);
+    }
+  }
+
+  async showSaveButton() {
+    if (await this.#isReportSaved()) {
+      this.#view.renderRemoveButton();
+      return;
+    }
+
+    this.#view.renderSaveButton();
+  }
+
+  async #isReportSaved() {
+    return !!(await this.#dbModel.getStoryById(this.#storyId));
   }
 
   // async notifyMe() {

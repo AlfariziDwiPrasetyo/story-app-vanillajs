@@ -728,7 +728,7 @@ i.loader-button {
   gap: 20px;
 }
 
-.notify-me {
+.story-detail-save, .story-detail-remove {
   margin-top: 20px;
   width: 100%;
 }
@@ -811,7 +811,7 @@ i.loader-button {
     border-radius: 8px;
   }
 
-  .notify-me {
+  .story-detail-save, .story-detail-remove {
     margin-top: 20px;
     width: 20%
   }

@@ -102,10 +102,7 @@ export function generateStoryDetailTemplate({
         <div class="story-detail__meta">
           <p><strong>ID:</strong> ${id}</p>
           <p><strong>Location:</strong> ${placeName ? placeName : 'Tidak Diketahui'}</p>
-          <div class="story-detail_button-container">
-            <button id="" class="btn notify-me">
-              Save Story <i class="far fa-bell"></i>
-            </button>
+          <div id="save-actions-container" class="save-actions-container">
           </div>
         </div>
       </div>
@@ -132,6 +129,22 @@ export function generateUnsubscribeButtonTemplate() {
   return `
     <button id="unsubscribe-button" class="btn-ghost unsubscribe-button">
       Unsubscribe <i class="fas fa-bell-slash"></i>
+    </button>
+  `;
+}
+
+export function generateSaveStoryButtonTemplate() {
+  return `
+    <button id="story-detail-save" class="story-detail-save btn btn-transparent">
+      Save story <i class="far fa-bookmark"></i>
+    </button>
+  `;
+}
+
+export function generateRemoveStoryButtonTemplate() {
+  return `
+    <button id="story-detail-remove" class="btn btn-transparent story-detail-remove">
+      Remove story <i class="fas fa-bookmark"></i>
     </button>
   `;
 }

@@ -2,11 +2,14 @@ import { parseActivePathname } from '../../routes/url-parser';
 import StoryDetailPresenter from './story-detail-presenter';
 import {
   generateLoaderAbsoluteTemplate,
+  generateRemoveStoryButtonTemplate,
+  generateSaveStoryButtonTemplate,
   generateStoriesListErrorTemplate,
   generateStoryDetailTemplate,
 } from '../../templates';
 import Map from '../../utils/map';
 import * as StoryAPI from '../../data/api';
+import Database from '../../database';
 
 export default class StoryDetailPage {
   #presenter = null;
@@ -27,6 +30,7 @@ export default class StoryDetailPage {
     this.#presenter = new StoryDetailPresenter(parseActivePathname().id, {
       view: this,
       apiModel: StoryAPI,
+      dbModel: Database,
     });
 
     this.#presenter.showStoryDetail();
@@ -48,6 +52,8 @@ export default class StoryDetailPage {
         this.#map.addMarker(storyCoordinate, markerOptions, popupOptions);
       }
     }
+
+    this.#presenter.showSaveButton();
   }
 
   populateStoryDetailError(error) {
@@ -71,12 +77,31 @@ export default class StoryDetailPage {
     document.getElementById('map-loading-container').innerHTML = '';
   }
 
-  // addNotifyMeEventListener() {
-  //   document.getElementById('story-detail-notify-me').addEventListener('click', () => {
-  //     console.log('masuk');
-  //     this.#presenter.notifyMe();
-  //   });
-  // }
+  renderSaveButton() {
+    document.getElementById('save-actions-container').innerHTML = generateSaveStoryButtonTemplate();
+
+    document.getElementById('story-detail-save').addEventListener('click', async () => {
+      await this.#presenter.saveReport();
+      await this.#presenter.showSaveButton();
+    });
+  }
+
+  renderRemoveButton() {
+    document.getElementById('save-actions-container').innerHTML =
+      generateRemoveStoryButtonTemplate();
+
+    document.getElementById('report-detail-remove').addEventListener('click', async () => {
+      alert('Fitur simpan laporan akan segera hadir!');
+    });
+  }
+
+  saveToBookmarkSuccessfully(message) {
+    console.log(message);
+  }
+
+  saveToBookmarkFailed(message) {
+    alert(message);
+  }
 
   async initialMap() {
     this.#map = await Map.build('#map', {

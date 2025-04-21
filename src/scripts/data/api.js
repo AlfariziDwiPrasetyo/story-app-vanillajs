@@ -150,3 +150,20 @@ export async function unsubscribePushNotification({ endpoint }) {
     ok: fetchResponse.ok,
   };
 }
+
+export async function sendReportToMeViaNotification(reportId) {
+  const accessToken = getAccessToken();
+
+  const fetchResponse = await fetch(ENDPOINTS.SEND_REPORT_TO_ME(reportId), {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  const json = await fetchResponse.json();
+
+  return {
+    ...json,
+    ok: fetchResponse.ok,
+  };
+}
