@@ -15,6 +15,7 @@ import {
   subscribe,
   unsubscribe,
 } from '../utils/notification-helper';
+import NotFoundPage from './not-found/not-found-page';
 
 class App {
   #content = null;
@@ -121,12 +122,12 @@ class App {
     const url = getActiveRoute();
     const route = routes[url];
 
-    const page = route();
+    const page = typeof route === 'function' ? route() : new NotFoundPage(); // fallback kalau bukan fungsi
 
     const transition = transitionHelper({
       updateDOM: async () => {
         this.#content.innerHTML = await page.render();
-        await page.afterRender();
+        await page.afterRender?.();
       },
     });
 
