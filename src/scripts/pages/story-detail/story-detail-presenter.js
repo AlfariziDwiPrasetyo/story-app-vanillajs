@@ -46,8 +46,8 @@ export default class StoryDetailPresenter {
 
   async saveStory() {
     try {
-      const story = await this.#apiModel.getStoryById(this.#storyId);
-      await this.#dbModel.putStory(story.story);
+      const response = await this.#apiModel.getStoryById(this.#storyId);
+      await this.#dbModel.putStory(response.story);
       this.#view.saveToBookmarkSuccessfully('Success to save to bookmark');
     } catch (error) {
       console.error('saveStory: error:', error);
@@ -66,7 +66,7 @@ export default class StoryDetailPresenter {
   }
 
   async showSaveButton() {
-    if (await this.#isReportSaved()) {
+    if (await this.#isStorySaved()) {
       this.#view.renderRemoveButton();
       return;
     }
@@ -74,20 +74,7 @@ export default class StoryDetailPresenter {
     this.#view.renderSaveButton();
   }
 
-  async #isReportSaved() {
+  async #isStorySaved() {
     return !!(await this.#dbModel.getStoryById(this.#storyId));
   }
-
-  // async notifyMe() {
-  //   try {
-  //     const response = await this.#apiModel.sendReportToMeViaNotification(this.#storyId);
-  //     if (!response.ok) {
-  //       console.error('notifyMe: response:', response);
-  //       return;
-  //     }
-  //     console.log('notifyMe:', response.message);
-  //   } catch (error) {
-  //     console.error('notifyMe: error:', error);
-  //   }
-  // }
 }

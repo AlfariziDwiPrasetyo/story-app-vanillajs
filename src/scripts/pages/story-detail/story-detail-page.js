@@ -38,7 +38,6 @@ export default class StoryDetailPage {
 
   async populateStoryDetail(story) {
     document.getElementById('story-detail').innerHTML = generateStoryDetailTemplate(story);
-
     if (story.placeName) {
       document.querySelector('.story-detail__body__map__container').style.display = 'block';
       await this.#presenter.showStoryDetailMap();
@@ -53,7 +52,7 @@ export default class StoryDetailPage {
       }
     }
 
-    this.#presenter.showSaveButton();
+    await this.#presenter.showSaveButton();
   }
 
   populateStoryDetailError(error) {
@@ -80,9 +79,10 @@ export default class StoryDetailPage {
   renderSaveButton() {
     document.getElementById('save-actions-container').innerHTML = generateSaveStoryButtonTemplate();
 
-    document.getElementById('story-detail-save').addEventListener('click', async () => {
-      await this.#presenter.saveStory();
-      await this.#presenter.showSaveButton();
+    document.addEventListener('click', (event) => {
+      if (event.target.matches('#story-detail-save')) {
+        this.#presenter.saveStory().then(() => this.#presenter.showSaveButton());
+      }
     });
   }
 

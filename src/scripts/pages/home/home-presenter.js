@@ -23,7 +23,6 @@ export default class HomePresenter {
         }),
       );
 
-      console.log(story);
       this.#view.populateStoriesList(story);
     } catch (error) {
       console.error('initialGallery: error:', error);

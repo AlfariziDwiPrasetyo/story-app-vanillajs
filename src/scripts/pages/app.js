@@ -122,7 +122,7 @@ class App {
     const url = getActiveRoute();
     const route = routes[url];
 
-    const page = typeof route === 'function' ? route() : new NotFoundPage(); // fallback kalau bukan fungsi
+    const page = typeof route === 'function' ? route() : new NotFoundPage();
 
     const transition = transitionHelper({
       updateDOM: async () => {
